@@ -10,10 +10,10 @@ The goal is to move beyond simple connectivity and establish a **Zero Trust** fo
 The network is segmented into three distinct security zones, isolated by Layer 2 VLANs on a Cisco switch and routed via Layer 3 Subinterfaces on the Palo Alto Firewall.
 
 | Zone / Enclave | VLAN ID | Description |
-| :--- | :--- | :--- | :--- |
-| **Corporate** | 10 | Standard staff network |
-| **Classified** | 20 | Sensitive Network  |
-| **Guest** | 30 | Non-employee guest traffic |
+| :--- | :--- | :--- |
+| Corporate | 10 | Standard staff network |
+| Classified | 20 | Sensitive Network |
+| Guest | 30 | Non-employee guest traffic |
 
 ## Traffic Flow Architecture
 
