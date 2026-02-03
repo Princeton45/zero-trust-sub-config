@@ -9,11 +9,13 @@ The goal is to move beyond simple connectivity and establish a **Zero Trust** fo
 
 The network is segmented into three distinct security zones, isolated by Layer 2 VLANs on a Cisco switch and routed via Layer 3 Subinterfaces on the Palo Alto Firewall.
 
-| Zone / Enclave | VLAN ID | Description |
+| Zone | VLAN ID | Description |
 | :--- | :--- | :--- |
 | Corporate | 10 | Standard staff network |
 | Classified | 20 | Sensitive Network |
 | Guest | 30 | Non-employee guest traffic |
+
+![diagram](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/diagram.png)
 
 ## Traffic Flow Architecture
 
@@ -23,7 +25,7 @@ The network is segmented into three distinct security zones, isolated by Layer 2
     *   **App-ID:** Is the traffic actually what it claims to be?
     *   **User-ID:** Who is sending the packet?
     *   **Security Policy:** Is the Corporate Zone allowed to talk to Classified Zone?
-4.  **Egress:** If the traffic matches an "Allow" policy, the Firewall routes the packet to the destination subnet (e.g., `ethernet1/1.30`), re-tags it for `VLAN 30`, and sends it back down the trunk to the switch for delivery.
+4.  **Egress:** When traffic matches an "Allow" policy, the firewall routes the packet to the destination sub-interface (e.g., `ethernet1/1.30`), re-tags it for `VLAN 30`, and forwards it back through the trunk to the switch for final delivery.
 
 ## Technology Stack
 *   **Virtualization:** GNS3 Network Simulator
@@ -31,23 +33,28 @@ The network is segmented into three distinct security zones, isolated by Layer 2
 *   **Switching:** Cisco IOSvL2
 *   **Endpoints:** Ubuntu Docker Containers
 
-## Project Evidence & Gallery
+## Project Implementation 
 
-### 1. Network Topology
-*A visual overview of the GNS3 layout, showing the relationship between the separate Enclaves, the Cisco Access Switch, and the Palo Alto Gateway.*
-> **[Insert Screenshot: GNS3 Topology Map]**
+### 1. Switch VLANs
 
-### 2. Switch VLANs
+![vlan](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/vlan.png)
 
 
-### 2. Interface Configuration (Subinterfaces)
-*Evidence of the "Router-on-a-Stick" configuration. This shows the physical interface divided into logical subinterfaces, each assigned to a specific VLAN ID, IP subnet, and Security Zone.*
-> **[Insert Screenshot: Palo Alto Network > Interfaces Tab]**
+### 2. Interface & Zone Configuration (Subinterfaces)
+This shows the "Router-on-a-Stick" configuration which includes the Palo ALto eth1/1 physical interface divided into logical subinterfaces, each assigned to a specific VLAN ID, IP subnet, and Security Zone.
+
+![interface](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/interface.png)
+
 
 ### 3. Security Policy Implementation
-*The "Zero Trust" mechanism. By default, the firewall drops all inter-zone traffic. This screenshot demonstrates the explicit rules created to allow specific, monitored communication between the Corporate and Restricted zones.*
-> **[Insert Screenshot: Palo Alto Policies > Security Tab]**
+*I configured a firewall security policy that permits traffic from the Corporate Zone to reach the Guest Zone, while an implicit deny blocks communication to the Classified Zone.*
+
+![sec-policy](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/sec-policy.png)
+
 
 ### 4. Traffic Inspection & Verification
-*Proof of segmentation. The logs demonstrate the initial default "Deny" action (blocking unauthorized lateral movement) followed by a successful "Allow" action after policy remediation.*
-> **[Insert Screenshot: Palo Alto Monitor > Traffic Logs showing both Red (Deny) and Green (Allow) entries]**
+*The logs demonstrate the initial default "Deny" action of blocking unauthorized pings from the Corporate PC (10.10.10.100) to the Classified PC (10.10.20.100) followed by a successful "Allow" action allowing pings from Corporate PC to Guest PC.*
+
+![logs](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/logs.png)
+
+
