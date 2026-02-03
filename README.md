@@ -15,7 +15,7 @@ The network is segmented into three distinct security zones, isolated by Layer 2
 | Classified | 20 | Sensitive Network |
 | Guest | 30 | Non-employee guest traffic |
 
-![diagram](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/diagram.png)
+![diagram](https://github.com/Princeton45/zero-trust-sub-config/blob/main/Screenshots/diagram.png)
 
 ## Traffic Flow Architecture
 
