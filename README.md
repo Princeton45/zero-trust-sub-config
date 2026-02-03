@@ -37,24 +37,24 @@ The network is segmented into three distinct security zones, isolated by Layer 2
 
 ### 1. Switch VLANs
 
-![vlan](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/vlan.png)
+![vlan](https://github.com/Princeton45/zero-trust-sub-config/blob/main/Screenshots/vlan.png)
 
 
 ### 2. Interface & Zone Configuration (Subinterfaces)
 This shows the "Router-on-a-Stick" configuration which includes the Palo ALto eth1/1 physical interface divided into logical subinterfaces, each assigned to a specific VLAN ID, IP subnet, and Security Zone.
 
-![interface](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/interface.png)
+![interface](https://github.com/Princeton45/zero-trust-sub-config/blob/main/Screenshots/interface.png)
 
 
 ### 3. Security Policy Implementation
 *I configured a firewall security policy that permits traffic from the Corporate Zone to reach the Guest Zone, while an implicit deny blocks communication to the Classified Zone.*
 
-![sec-policy](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/sec-policy.png)
+![sec-policy](https://github.com/Princeton45/zero-trust-sub-config/blob/main/Screenshots/sec-policy.png)
 
 
 ### 4. Traffic Inspection & Verification
 *The logs demonstrate the initial default "Deny" action of blocking unauthorized pings from the Corporate PC (10.10.10.100) to the Classified PC (10.10.20.100) followed by a successful "Allow" action allowing pings from Corporate PC to Guest PC.*
 
-![logs](https://github.com/Princeton45/zero-trust-sub-config/blob/main/screenshots/logs.png)
+![logs](https://github.com/Princeton45/zero-trust-sub-config/blob/main/Screenshots/logs.png)
 
 
