@@ -1,0 +1,3 @@
+https://drive.google.com/drive/folders/1YNtB7D9GXcWOjBNNJ8tboNFdQgIVB-_B?usp=sharing
+
+Password to login to the Firewall is in the drive under Homelab Notes > Palo Alto
